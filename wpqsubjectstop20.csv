@@ -1,0 +1,61 @@
+﻿name,year,value,lastValue,color,rank,group
+Children,2015,1113,1113,#046a38,1,Normal
+Staff,2015,891,891,#046a38,2,Normal
+Costs,2015,721,721,#046a38,3,Normal
+Training,2015,578,578,#046a38,4,Normal
+Expenditure,2015,561,561,#046a38,5,Normal
+Young people,2015,535,535,#046a38,6,Normal
+Mental health services,2015,524,524,#046a38,7,Normal
+Syria,2015,502,502,#046a38,8,Normal
+Health services,2015,490,490,#046a38,9,Normal
+Armed forces,2015,479,479,#046a38,10,Normal
+Social security benefits,2015,475,475,#046a38,11,Normal
+Railways,2015,452,452,#046a38,12,Normal
+Drugs,2015,440,440,#046a38,13,Normal
+Housing,2015,427,427,#046a38,14,Normal
+Schools,2015,422,422,#046a38,15,Normal
+Scotland,2015,413,413,#046a38,16,Normal
+Refugees,2015,410,410,#046a38,17,Normal
+UK membership of EU,2015,392,392,#046a38,18,EU
+Employment,2015,389,389,#046a38,19,Normal
+NHS,2015,382,382,#046a38,20,Normal
+Brexit,2016,1812,1812,#046a38,1,EU
+Staff,2016,1308,891,#046a38,2,Normal
+Children,2016,1204,1113,#046a38,3,Normal
+Costs,2016,794,721,#046a38,4,Normal
+Health services,2016,673,490,#046a38,5,Normal
+Training,2016,634,578,#046a38,6,Normal
+NHS,2016,626,382,#046a38,7,Normal
+Schools,2016,551,422,#046a38,8,Normal
+Pay,2016,503,503,#046a38,9,Normal
+Procurement,2016,478,291,#046a38,10,Normal
+Armed forces,2016,464,479,#046a38,11,Normal
+Expenditure,2016,460,561,#046a38,12,Normal
+Mental health services,2016,460,524,#046a38,13,Normal
+Housing,2016,441,427,#046a38,14,Normal
+Contracts,2016,393,220,#046a38,15,Normal
+Asylum,2016,380,321,#046a38,16,Normal
+Females,2016,368,308,#046a38,17,Normal
+Scotland,2016,364,413,#046a38,18,Normal
+Young people,2016,362,535,#046a38,19,Normal
+Drugs,2016,351,440,#046a38,20,Normal
+Brexit,2017,5966,1812,#046a38,1,EU
+Children,2017,3503,1204,#046a38,2,Normal
+Staff,2017,2651,1308,#046a38,3,Normal
+Universal credit,2017,2081,201,#046a38,4,Normal
+Costs,2017,2034,794,#046a38,5,Normal
+NHS,2017,1771,626,#046a38,6,Normal
+Disclosure of information,2017,1515,1515,#046a38,7,Normal
+Training,2017,1483,634,#046a38,8,Normal
+Health services,2017,1414,673,#046a38,9,Normal
+Procurement,2017,1408,478,#046a38,10,Normal
+Contracts,2017,1405,393,#046a38,11,Normal
+Schools,2017,1396,551,#046a38,12,Normal
+Immigration,2017,1367,261,#046a38,13,Normal
+Housing,2017,1319,441,#046a38,14,Normal
+Expenditure,2017,1300,460,#046a38,15,Normal
+Mental health services,2017,1144,460,#046a38,16,Normal
+Young people,2017,1113,362,#046a38,17,Normal
+Drugs,2017,1056,351,#046a38,18,Normal
+Personal independence payment,2017,1056,1056,#046a38,19,Normal
+Construction,2017,1052,1052,#046a38,20,Normal
