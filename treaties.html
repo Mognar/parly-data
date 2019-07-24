@@ -23,7 +23,7 @@
     background-color: green; 
     border: 0px;		
     border-radius: 2px;			
-    pointer-events: none;			
+    pointer-events: all;			
 }
 
 h1 {
@@ -42,6 +42,9 @@ padding: 2px;
 .header {
 background-color: #4d4d4d;
 }
+a {
+color:white;
+	  }
 
 
   </style>
@@ -147,7 +150,7 @@ d3.csv("https://rawcdn.githack.com/Mognar/parly-data/282f57394f4dfe13a568d9cea1b
     //.attr("height", 15)
 	  .attr("fill", "red");
   
-	tooltip.html("<p class='tooltipp'><b>" + d.Title + "</b><br><br>" + d.Ref + "<br>" + d.Date + "<br>" + d.Weblocation + "</p>");
+	tooltip.html("<p class='tooltipp'><b>" + d.Title + "</b><br><br>" + d.Ref + "<br>" + d.Date + "<br><a href=" + d.Weblocation + "target='_blank'>"+ d.Weblocation +"</a></p>");
     tooltip
       .style("top", 30)
 	  
