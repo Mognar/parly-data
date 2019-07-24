@@ -1,0 +1,84 @@
+﻿ firstname , lastname , posName ,startdate,enddate, group 
+ Penelope , Mordaunt , Secretary of State for Defence ,2019-05-01,, Ministry of Defence 
+ Roderick , Stewart , Secretary of State for International Development ,2019-05-01,, Department for International Development 
+ Amber , Rudd , Secretary of State for Work and Pensions ,2018-11-16,, Department for Work and Pensions 
+ Stephen , Barclay , Secretary of State for Exiting the European Union ,2018-11-16,, Department for Exiting the European Union  
+ Dominic , Raab , Secretary of State for Exiting the European Union ,2018-07-09,2018-11-15, Department for Exiting the European Union  
+ Jeremy , Wright , Secretary of State for Digital Culture Media and Sport ,2018-07-09,, Department for Digital Culture Media and Sport 
+ Jeremy , Hunt , Secretary of State for Foreign and Commonwealth Affairs ,2018-07-09,, Foreign and Commonwealth Office 
+ Matthew , Hancock , Secretary of State for Health and Social Care ,2018-07-09,, Department of Health and Social Care 
+ James , Brokenshire , Secretary of State for Housing Communities and Local Government ,2018-04-30,, Ministry of Housing Communities and Local Government 
+ Esther , McVey , Secretary of State for Work and Pensions ,2018-01-08,2018-11-15, Department for Work and Pensions 
+ Sajid , Javid , Secretary of State for Housing Communities and Local Government ,2018-01-08,2018-04-30, Ministry of Housing Communities and Local Government 
+ Matthew , Hancock , Secretary of State for Digital Culture Media and Sport ,2018-01-08,2018-07-09, Department for Digital Culture Media and Sport 
+ Jeremy , Hunt , Secretary of State for Health and Social Care ,2018-01-08,2018-07-09, Department of Health and Social Care 
+ Damian , Hinds , Secretary of State for Education ,2018-01-08,, Department for Education 
+ David , Gauke , Lord Chancellor and Secretary of State for Justice ,2018-01-08,, Ministry of Justice 
+ Karen , Bradley , Secretary of State for Northern Ireland ,2018-01-08,, Northern Ireland Office 
+ Penelope , Mordaunt , Secretary of State for International Development ,2017-11-09,2019-05-01, Department for International Development 
+ Gavin , Williamson , Secretary of State for Defence ,2017-11-02,2019-05-01, Ministry of Defence 
+ Karen , Bradley , Secretary of State for Digital Culture Media and Sport ,2017-07-03,2018-01-08, Department for Digital Culture Media and Sport 
+ David , Lidington , Lord Chancellor and Secretary of State for Justice ,2017-06-11,2018-01-08, Ministry of Justice 
+ Damian , Green , First Secretary of State and Minister for the Cabinet Office ,2017-06-11,2017-12-20, Cabinet Office 
+ David , Gauke , Secretary of State for Work and Pensions ,2017-06-11,2018-01-08, Department for Work and Pensions 
+ Michael , Gove , Secretary of State for Environment Food and Rural Affairs ,2017-06-11,, Department for Environment Food and Rural Affairs 
+ Justine , Greening , Secretary of State for Education ,2016-07-14,2018-01-08, Department for Education 
+ Elizabeth , Truss , Lord Chancellor and Secretary of State for Justice ,2016-07-14,2017-06-11, Ministry of Justice 
+ Andrea , Leadsom , Secretary of State for Environment Food and Rural Affairs ,2016-07-14,2017-06-11, Department for Environment Food and Rural Affairs 
+ Sajid , Javid , Secretary of State for Communities and Local Government ,2016-07-14,2018-01-08, Department for Communities and Local Government 
+ Damian , Green , Secretary of State for Work and Pensions ,2016-07-14,2017-06-11, Department for Work and Pensions 
+ James , Brokenshire , Secretary of State for Northern Ireland ,2016-07-14,2018-01-08, Northern Ireland Office 
+ Karen , Bradley , Secretary of State for Culture Media and Sport ,2016-07-14,2017-07-03, Department for Culture Media and Sport 
+ Priti , Patel , Secretary of State for International Development ,2016-07-14,2017-11-08, Department for International Development 
+ Gregory , Clark , Secretary of State for Business Energy and Industrial Strategy  ,2016-07-14,, Department for Business Energy and Industrial Strategy 
+ Christopher , Grayling , Secretary of State for Transport ,2016-07-14,, Department for Transport 
+ David , Davis , Secretary of State for Exiting the European Union ,2016-07-13,2018-07-08, Department for Exiting the European Union  
+ Alexander , Johnson , Secretary of State for Foreign and Commonwealth Affairs ,2016-07-13,2018-07-09, Foreign and Commonwealth Office 
+ Liam , Fox , Secretary of State for International Trade and President of the Board of Trade ,2016-07-13,, UK Export Finance 
+ Liam , Fox , Secretary of State for International Trade and President of the Board of Trade ,2016-07-13,, Department for International Trade 
+ Stephen , Crabb , Secretary of State for Work and Pensions ,2016-03-19,2016-07-14, Department for Work and Pensions 
+ Alun , Cairns , Secretary of State for Wales ,2016-03-19,, Wales Office 
+ Michael , Gove , Lord Chancellor and Secretary of State for Justice ,2015-05-08,2016-07-14, Ministry of Justice 
+ Amber , Rudd , Secretary of State for Energy and Climate Change ,2015-05-08,2016-07-13, Department of Energy and Climate Change 
+ Gregory , Clark , Secretary of State for Communities and Local Government ,2015-05-08,2016-07-14, Department for Communities and Local Government 
+ John , Whittingdale , Secretary of State for Culture Media and Sport ,2015-05-08,2016-07-14, Department for Culture Media and Sport 
+ George , Osborne , Chancellor of the Exchequer and First Secretary of State ,2015-05-08,2016-07-13, HM Treasury 
+ Sajid , Javid , Secretary of State for Business Innovation and Skills ,2015-05-08,2016-07-14, Department for Business Innovation and Skills 
+ David , Mundell , Secretary of State for Scotland ,2015-05-08,, Scotland Office 
+ Nicola , Morgan , Secretary of State for Education ,2014-07-15,2016-07-13, Department for Education 
+ Elizabeth , Truss , Secretary of State for Environment Food and Rural Affairs ,2014-07-15,2016-07-14, Department for Environment Food and Rural Affairs 
+ Michael , Fallon , Secretary of State for Defence ,2014-07-15,2017-11-01, Ministry of Defence 
+ William , Hague , First Secretary of State and Leader of the House of Commons ,2014-07-15,2015-05-08, Office of the Leader of the House of Commons 
+ Stephen , Crabb , Secretary of State for Wales ,2014-07-15,2016-03-19, Wales Office 
+ Philip , Hammond , Secretary of State for Foreign and Commonwealth Affairs ,2014-07-15,2016-07-13, Foreign and Commonwealth Office 
+ Sajid , Javid , Secretary of State for Culture Media and Sport ,2014-04-09,2015-05-08, Department for Culture Media and Sport 
+ Alexander , Carmichael , Secretary of State for Scotland ,2013-10-07,2015-05-08, Scotland Office 
+ Christopher , Grayling , Lord Chancellor and Secretary of State for Justice ,2012-09-06,2015-05-08, Ministry of Justice 
+ Owen , Paterson , Secretary of State for Environment Food and Rural Affairs ,2012-09-06,2014-07-15, Department for Environment Food and Rural Affairs 
+ Theresa , Villiers , Secretary of State for Northern Ireland ,2012-09-06,2016-07-14, Northern Ireland Office 
+ Maria , Miller , Secretary of State for Culture Media and Sport ,2012-09-06,2014-04-09, Department for Culture Media and Sport 
+ Jeremy , Hunt , Secretary of State for Health ,2012-09-06,2018-01-08, Department of Health 
+ Justine , Greening , Secretary of State for International Development ,2012-09-06,2016-07-14, Department for International Development 
+ David , Jones , Secretary of State for Wales ,2012-09-06,2014-07-15, Wales Office 
+ Patrick , McLoughlin , Secretary of State for Transport ,2012-09-06,2016-07-14, Department for Transport 
+ Stephen , Crabb , Lord Commissioner (HM Treasury) (Whip) (Jointly as unpaid Parliamentary Under Secretary of State at the Wales Office) ,2012-09-06,2014-07-15, HM Treasury 
+ Edward , Davey , Secretary of State for Energy and Climate Change ,2012-02-03,2015-05-08, Department of Energy and Climate Change 
+ Philip , Hammond , Secretary of State for Defence ,2011-10-14,2014-07-15, Ministry of Defence 
+ Justine , Greening , Secretary of State for Transport ,2011-10-14,2012-09-06, Department for Transport 
+ Michael , Moore , Secretary of State for Scotland ,2010-05-29,2013-10-07, Scotland Office 
+ Michael , Gove , Secretary of State for Education ,2010-05-12,2014-07-15, Department for Education 
+ Kenneth , Clarke , Lord Chancellor and Secretary of State for Justice ,2010-05-12,2012-09-06, Ministry of Justice 
+ Christopher , Huhne , Secretary of State for Energy and Climate Change ,2010-05-12,2012-02-03, Department of Energy and Climate Change 
+ Caroline , Spelman , Secretary of State for Environment Food and Rural Affairs ,2010-05-12,2012-09-06, Department for Environment Food and Rural Affairs 
+ Eric , Pickles , Secretary of State for Communities and Local Government ,2010-05-12,2015-05-08, Department for Communities and Local Government 
+ George , Duncan Smith , Secretary of State for Work and Pensions ,2010-05-12,2016-03-19, Department for Work and Pensions 
+ Liam , Fox , Secretary of State for Defence ,2010-05-12,2011-10-14, Ministry of Defence 
+ Owen , Paterson , Secretary of State for Northern Ireland ,2010-05-12,2012-09-06, Northern Ireland Office 
+ Jeremy , Hunt , Secretary of State for Culture Media and Sport ,2010-05-12,2012-09-06, Department for Culture Media and Sport 
+ Andrew , Lansley , Secretary of State for Health ,2010-05-12,2012-09-06, Department of Health 
+ William , Hague , Foreign Secretary and First Secretary of State ,2010-05-12,2014-07-15, Foreign and Commonwealth Office 
+ John , Cable , Secretary of State for Business Innovation and Skills ,2010-05-12,2015-05-08, Department for Business Innovation and Skills 
+ Andrew , Mitchell , Secretary of State for International Development ,2010-05-12,2012-09-06, Department for International Development 
+ Cheryl , Gillan , Secretary of State for Wales ,2010-05-12,2012-09-06, Wales Office 
+ Philip , Hammond , Secretary of State for Transport ,2010-05-12,2011-10-14, Department for Transport 
+ Daniel , Alexander , Secretary of State for Scotland ,2010-05-12,2010-05-29, Scotland Office 
