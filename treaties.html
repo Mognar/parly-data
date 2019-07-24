@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0px;background-color: #f8f7f7; }
+	svg {
+	background-color: #f8f7f7;
+	overflow-x:scroll;
+	overflow-y:scroll;
+	}
+	
+	div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: auto;	
+	max-width: 300px;
+    padding: 2px;				
+    font: 12px sans-serif;	
+	color: white;
+    background-color: green; 
+    border: 0px;		
+    border-radius: 2px;			
+    pointer-events: none;			
+}
+
+h1 {
+font: 32px sans-serif;
+text-align: center;
+background-color: #4d4d4d;
+color: white;
+}
+h2 {
+font: 14px sans-serif;
+text-align: center;
+background-color: #4d4d4d;
+color: white;
+padding: 2px;
+}
+.header {
+background-color: #4d4d4d;
+}
+
+
+  </style>
+</head>
+
+<body>
+<div class="header">
+<h1>Treaties signed by the UK Government 1992 to Present</h1>
+<h2>Hover over a point to see the treaty name, laid date and reference. Double-click a point to open the treaty document (where available). </h2></div>
+<div class="chart-container"></div>
+  <script>
+    // Feel free to change or delete any of the code you see in this editor!
+		
+	
+var tooltip = d3.select(".chart-container")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden");
+
+
+function responsivefy(svg) {
+  var container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style("width")),
+        height = parseInt(svg.style("height")),
+        aspect = width / height;
+
+    // add viewBox and preserveAspectRatio properties,
+    // and call resize so that svg resizes on inital page load
+    svg.attr("viewBox", "0 0 " + width + " " + height)
+        .attr("perserveAspectRatio", "xMinYMid")
+        .call(resize);
+
+    // to register multiple listeners for same event type, 
+    // you need to add namespace, i.e., 'click.foo'
+    // necessary if you call invoke this function for multiple svgs
+    // api docs: https://github.com/mbostock/d3/wiki/Selections#on
+    d3.select(window).on("resize." + container.attr("id"), resize);
+
+    // get width of container and resize svg to fit it
+    function resize() {
+        var targetWidth = parseInt(container.style("width"));
+        svg.attr("width", targetWidth);
+        svg.attr("height", Math.round(targetWidth / aspect));
+    }
+}  
+    var svg = d3.select(".chart-container").append("svg")
+      .attr("width", 1200)
+      .attr("height", 500)
+	  .attr("align", "center")
+	  .call(responsivefy);
+	  
+	  
+	
+var parseDate = d3.timeParse("%d/%m/%Y")
+
+    
+var xScale = d3.scaleTime()
+  .domain([new Date(1992, 0, 1), new Date(2019, 11, 31)])
+  .range([50, 1150]);
+ 
+
+var xAxis = d3.axisBottom(xScale);
+	//.ticks(d3.timeFormat.months)
+    //.tickSize(16, 0)
+    //.tickFormat(d3.timeFormat("%Y"));
+
+//d3.csv("https://rawcdn.githack.com/Mognar/parly-data/67eccc28884e92eb07c083df4cb8ded645e2aa82/results4usdates.csv", function (error, data) {
+d3.csv("https://rawcdn.githack.com/Mognar/parly-data/282f57394f4dfe13a568d9cea1b8d5e8e091d7ab/results4.csv", function (error, data) {
+  data.forEach(function(d){
+	d.Date1 = parseDate(d.Date)
+	d.Date2 = d3.timeMonth(d.Date1)
+	console.log(d.Date2)
+})
+  svgEnter = svg.selectAll("rect")
+  .data(data)
+  .enter();
+  
+  svgEnter.append("rect")
+  .attr("rx", 5)
+  .attr("x", function (d) {
+    x = xScale(new Date(d.Date2));
+    return x;
+  })
+  .attr("y", function(d, i) { return 400 - (d.Count*12); })
+  .attr("width", 8)
+  .attr("height", 8)
+  .attr("fill", "#4d4d4d")
+  .attr("stroke-width", ".2px")
+  .attr("stroke", "black")
+  .on("mouseover", function (d) {
+    rect = d3.select(this);
+    rect.transition()
+    .duration(100)
+    /*.attr("y", function(d, i) { 
+      console.log(this);
+      var x = rect.x;
+      return 20; })*/
+    .transition()
+    .duration(50)
+    //.attr("rx", 2)
+    //.attr("width", 300)
+    //.attr("height", 15)
+	  .attr("fill", "red");
+  
+	tooltip.html("<p class='tooltipp'><b>" + d.Title + "</b><br><br>" + d.Ref + "<br>" + d.Date + "<br>" + d.Weblocation + "</p>");
+    tooltip
+      .style("top", 30)
+	  
+	  .style("left", function() {
+	  if (d3.event.pageX > 600) {
+	  return (d3.event.pageX - 350) + "px" }
+		else {
+		return (d3.event.pageX) + "px"
+		}})
+		
+      .style("top", (d3.event.pageY - 150) + "px")
+	  .attr("class", "tooltip");
+	  
+      /*.style("left",function () {
+      console.log("x", x);
+      return d3.event.pageX;
+    })*/
+		setTimeout(function () { 
+      tooltip.style("visibility", "visible");
+    }, 1000);
+  })
+  .on('dblclick', function(d) {
+		if (d.Weblocation != "") {
+        console.log('open tab')
+        window.open(
+          d.Weblocation,
+          '_blank' // <- This is what makes it open in a new window.
+        );
+		};
+      })
+    .on("mouseout", function (d) {
+    d3.select(this)
+    .transition()
+    .duration(1000)
+    .attr("rx", 5)
+    //.attr("width", 10)
+    //.attr("height", 10)
+    .transition()
+    .duration(500)
+    .delay(500)
+    .attr("fill", "green")
+	
+		//tooltip.text(d.Name);
+    //return tooltip.style("visibility", "hidden");
+	return setTimeout(function () { 
+      tooltip.style("visibility", "hidden");
+    }, 1000);
+
+  });
+});
+    
+svg.append("g")
+  .attr("transform", "translate(0,420)")
+  .call(xAxis);
+
+  </script>
+</body>
