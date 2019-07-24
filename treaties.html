@@ -74,7 +74,7 @@ var tooltip = d3.select(".chart-container")
     .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
     .attr('preserveAspectRatio','xMinYMin')
     .append("g");
-    //.attr("transform", "translate(" + Math.min(width,height) / 20 + "," + Math.min(width,height) / 20 + ")");
+    .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")");
 	  
 	
 var parseDate = d3.timeParse("%d/%m/%Y")
