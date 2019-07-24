@@ -2,6 +2,8 @@
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
   <style>
     body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0px;background-color: #f8f7f7; }
 	svg {
@@ -168,6 +170,15 @@ d3.csv("https://rawcdn.githack.com/Mognar/parly-data/282f57394f4dfe13a568d9cea1b
     }, 1000);
   })
   .on('dblclick', function(d) {
+		if (d.Weblocation != "") {
+        console.log('open tab')
+        window.open(
+          d.Weblocation,
+          '_blank' // <- This is what makes it open in a new window.
+        );
+		};
+      })
+	.on('doubletap', function(d) {
 		if (d.Weblocation != "") {
         console.log('open tab')
         window.open(
