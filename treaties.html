@@ -54,7 +54,7 @@ background-color: #4d4d4d;
 	var container = d3.select(".chart-container")
 	.attr("align","center");
 	var width = window.innerWidth
-    var height = window.innerHeight * .7
+    var height = window.innerHeight
 	
 	
 	
@@ -68,13 +68,13 @@ var tooltip = d3.select(".chart-container")
       /*.attr("width", 1000)
       .attr("height", 500)
 	  .attr("align","center")*/
-	  .attr("width", '90%')
+	  //.attr("width", '90%')
 	//.attr("height", '15%')
 	.attr("align", "center")
     .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
     .attr('preserveAspectRatio','xMinYMin')
     .append("g");
-    //.attr("transform", "translate(" + Math.min(width,height) / 25 + "," + Math.min(width,height) / 25 + ")");
+    .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")");
 	  
 	
 var parseDate = d3.timeParse("%d/%m/%Y")
