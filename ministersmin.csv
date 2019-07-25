@@ -1,10 +1,10 @@
-﻿ firstname , lastname , posName ,startdate,enddate, group 
- Theresa , May , Prime Minister First Lord of the Treasury and Minister for the Civil Service , 2016-07-13 ,  , Cabinet Office 
- David , Cameron , Prime Minister First Lord of the Treasury and Minister for the Civil Service , 2010-05-11 , 2016-07-13 , Cabinet Office 
- Nicholas , Clegg , Deputy Prime Minister Lord President of the Council (Cabinet Office) (with Special Responsibility for Political and Constitutional Reform) , 2010-05-11 , 2015-05-08 , Cabinet Office 
- George , Osborne , Chancellor of the Exchequer , 2010-05-12 , 2015-05-08 , HM Treasury 
+firstname,lastname,posName,startdate,enddate,group
+ Theresa,May,Prime Minister First Lord of the Treasury and Minister for the Civil Service,2016-07-13,,Cabinet Office 
+ David,Cameron,Prime Minister First Lord of the Treasury and Minister for the Civil Service,2010-05-11,2016-07-13,Cabinet Office 
+ Nicholas,Clegg,Deputy Prime Minister Lord President of the Council (Cabinet Office) (with Special Responsibility for Political and Constitutional Reform),2010-05-11,2015-05-08,Cabinet Office 
+ George , Osborne,Chancellor of the Exchequer,2010-05-12,2015-05-08, HM Treasury 
  George , Osborne , Chancellor of the Exchequer and First Secretary of State ,2015-05-08,2016-07-13, HM Treasury 
- Philip , Hammond , Chancellor of the Exchequer , 2016-07-13 ,  , HM Treasury 
+ Philip , Hammond , Chancellor of the Exchequer ,2016-07-13,, HM Treasury 
  William , Hague , First Secretary of State and Leader of the House of Commons ,2014-07-15,2015-05-08, Office of the Leader of the House of Commons 
  Damian , Green , First Secretary of State and Minister for the Cabinet Office ,2017-06-11,2017-12-20, Cabinet Office 
  William , Hague , Foreign Secretary and First Secretary of State ,2010-05-12,2014-07-15, Foreign and Commonwealth Office 
