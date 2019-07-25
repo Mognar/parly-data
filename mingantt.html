@@ -1,0 +1,399 @@
+<html>
+<head>
+<style>
+
+    * {
+      margin: 0;
+      padding: 0;
+  }
+  body {
+      background: #lightgrey;
+      font-family: 'Open-Sans',sans-serif;
+
+  }
+
+#container{
+  margin: 0 auto;
+  position: relative;
+  width:auto;
+  overflow: visible;
+}
+
+
+  .svg {
+    /*width:800px;
+    height:400px;*/
+    overflow: visible;
+    position:absolute;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.3;
+    shape-rendering: crispEdges;
+}
+.grid path {
+      stroke-width: 0;
+}
+
+
+#tag {
+  color: white;
+  background: #FA283D;
+  width: 150px;
+  position: absolute;
+  display: none;
+  padding:3px 6px;
+  margin-left: -40px;
+  font-size: 11px;
+}
+
+
+
+#tag:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  width: 0;
+  border-width: 10px;
+  border-bottom-color: #FA283D;
+  top: -20px;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+</head>
+
+ <div id = "container">
+<div class = "svg"></div>
+<div id = "tag"></div>
+</div>
+  <script>
+
+
+  var w = 800;
+  var h = 400;
+
+
+  var svg = d3.selectAll(".svg")
+  //.selectAll("svg")
+  .append("svg")
+  //.attr("width", w)
+  //.attr("height", h)
+  .attr("width", 1200)
+  .attr("height", 500)
+  .attr("class", "svg");
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+ d3.csv("https://rawcdn.githack.com/Mognar/parly-data/6a6cf6862f47bf14a9ee73c9320e1d963171cc53/ministersmin.csv", function (error, data) {
+
+data.forEach(function(d) {
+	d.firstname = d.firstname
+	d.lastname = d.lastname
+	d.posName = d.posName
+	d.startdate = d.startdate
+	d.group = d.group
+	if (d.enddate == "") {
+		d.enddate = today}
+	else{
+	d.enddate = d.enddate}
+	})
+
+ var dateFormat = d3.time.format("%Y-%m-%d");
+
+var timeScale = d3.time.scale()
+        .domain([d3.min(data, function(d) {return dateFormat.parse(d.startdate);}),
+                 d3.max(data, function(d) {return dateFormat.parse(d.enddate);})])
+        .range([0,w]);
+
+var categories = new Array();
+
+for (var i = 0; i < data.length; i++){
+    categories.push(data[i].posName);
+}
+
+var catsUnfiltered = categories; //for vert labels
+
+categories = checkUnique(categories);
+
+
+makeGant(data, w, h);
+
+var title = svg.append("text")
+              .text("Ministers over time")
+              .attr("x", w/2)
+              .attr("y", 25)
+              .attr("text-anchor", "left")
+              .attr("font-size", 18)
+              .attr("fill", "#009FFC");
+
+
+
+function makeGant(tasks, pageWidth, pageHeight){
+
+var barHeight = 8;
+var gap = barHeight;
+var topPadding = 30;
+var sidePadding = 255;
+
+var colorScale = d3.scale.ordinal()
+    .domain([0, categories.length])
+    //.range(["#b773af", "#18c04f","##887e86"])
+    .range(["#b25707","#b714fa","#700fc1","#a2aeaf","#cc50ef","#a82380","#8b0987"])
+	//.range(['#d73027', '#fee08b', '#1a9850'])
+    //.interpolate(d3.interpolateHcl);
+
+makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
+drawRects(tasks, gap, topPadding, sidePadding, barHeight, colorScale, pageWidth, pageHeight);
+vertLabels(gap, topPadding, sidePadding, barHeight, colorScale);
+
+}
+
+
+function drawRects(data, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h){
+
+var bigRects = svg.append("g")
+    .selectAll("rect")
+   .data(data)
+   .enter()
+   .append("rect")
+   .attr("x", 0)
+   .attr("y", function(d, i){
+      return i*theGap + theTopPad;
+  })
+   .attr("width", function(d){
+      return w + theSidePad * 2;
+
+   })
+   .attr("height", theGap)
+   .attr("stroke", "none")
+   .attr("fill", function(d){
+    for (var i = 0; i < categories.length; i++){
+        if (d.posName == categories[i]){
+          return d3.rgb(theColorScale(i));
+		  //return d3.rgb("#3a0");
+        }
+    }
+   })
+
+   .attr("opacity", 0.2);
+
+
+     var rectangles = svg.append('g')
+     .selectAll("rect")
+     .data(data)
+     .enter();
+
+
+   var innerRects = rectangles.append("rect")
+             .attr("rx", 3)
+             .attr("ry", 3)
+             .attr("x", function(d){
+              return timeScale(dateFormat.parse(d.startdate)) + theSidePad;
+              })
+             .attr("y", function(d, i){
+                return i*theGap + theTopPad;
+            })
+             .attr("width", function(d){
+                return (timeScale(dateFormat.parse(d.enddate))-timeScale(dateFormat.parse(d.startdate)));
+             })
+             .attr("height", theBarHeight)
+             .attr("stroke", "none")
+             .attr("fill", function(d){
+              for (var i = 0; i < categories.length; i++){
+                  if (d.posName == categories[i]){
+                    return d3.rgb(theColorScale(i));
+                  }
+              }
+             })
+
+
+         var rectText = rectangles.append("text")
+               .text(function(d){
+                return d.firstname + " " + d.lastname;
+               })
+               .attr("x", function(d){
+                return (timeScale(dateFormat.parse(d.enddate))-timeScale(dateFormat.parse(d.startdate)))/2 + timeScale(dateFormat.parse(d.startdate)) + theSidePad;
+                })
+               .attr("y", function(d, i){
+                  return i*theGap + 8 + theTopPad;
+              })
+               .attr("font-size", 8)
+               .attr("text-anchor", "middle")
+               .attr("text-height", theBarHeight)
+               .attr("fill", "#000");
+
+
+rectText.on('mouseover', function(e) {
+ // console.log(this.x.animVal.getItem(this));
+               var tag = "";
+
+         if (d3.select(this).data()[0].enddate != undefined){
+          tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+                "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
+                "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
+				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
+                "Ends: " + d3.select(this).data()[0].enddate + "<br/>" +
+                "Government grouping: " + d3.select(this).data()[0].group;
+         } else {
+          tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+                "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
+				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
+                "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
+                "Government grouping: " + d3.select(this).data()[0].group;
+         }
+         var output = document.getElementById("tag");
+
+          var x = this.x.animVal.getItem(this) + "px";
+          var y = this.y.animVal.getItem(this) + 25 + "px";
+
+
+
+         output.innerHTML = tag;
+         output.style.top = y;
+         output.style.left = x;
+         output.style.display = "block";
+       }).on('mouseout', function() {
+         var output = document.getElementById("tag");
+         output.style.display = "none";
+             });
+
+
+innerRects.on('mouseover', function(e) {
+ //console.log(this);
+         var tag = "";
+
+         if (d3.select(this).data()[0].enddate != undefined){
+          tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+                "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
+				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
+                "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
+                "Ends: " + d3.select(this).data()[0].enddate + "<br/>" +
+                "Government grouping: " + d3.select(this).data()[0].group;
+         } else {
+          tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+                "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
+				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
+                "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
+                "Government grouping: " + d3.select(this).data()[0].group;
+         }
+         var output = document.getElementById("tag");
+
+         var x = (this.x.animVal.value + this.width.animVal.value/2) + "px";
+         var y = this.y.animVal.value + 25 + "px";
+
+
+
+         output.innerHTML = tag;
+         output.style.top = y;
+         output.style.left = x;
+         output.style.display = "block";
+       }).on('mouseout', function() {
+         var output = document.getElementById("tag");
+         output.style.display = "none";
+
+ });
+
+
+
+}
+
+
+function makeGrid(theSidePad, theTopPad, w, h){
+
+var xAxis = d3.svg.axis()
+    .scale(timeScale)
+    .orient('bottom')
+    .ticks(d3.time.years, 1)
+    .tickSize(h*1.5+theTopPad+50, 0, 0)
+    .tickFormat(d3.time.format('%Y'));
+
+var grid = svg.append('g')
+    .attr('class', 'grid')
+    .attr('transform', 'translate(' +theSidePad + ', ' + (theTopPad) + ')')
+    //.attr('transform', 'translate(' +theSidePad + ')')
+    .call(xAxis)
+    .selectAll("text")
+            .style("text-anchor", "left")
+            .attr("fill", "#000")
+            .attr("stroke", "none")
+            .attr("font-size", 10)
+            .attr("dy", "1em");
+}
+
+function vertLabels(theGap, theTopPad, theSidePad, theBarHeight, theColorScale){
+  var numOccurances = new Array();
+  var prevGap = 0;
+
+  for (var i = 0; i < categories.length; i++){
+    numOccurances[i] = [categories[i], getCount(categories[i], catsUnfiltered)];
+  }
+
+  var axisText = svg.append("g") //without doing this, impossible to put grid lines behind text
+   .selectAll("text")
+   .data(numOccurances)
+   .enter()
+   .append("text")
+   .text(function(d){
+    return d[0];
+   })
+   .attr("x", 10)
+   .attr("y", function(d, i){
+    if (i > 0){
+        for (var j = 0; j < i; j++){
+          prevGap += numOccurances[i-1][1];
+         // console.log(prevGap);
+          return d[1]*theGap/2 + prevGap*theGap + theTopPad;
+        }
+    } else{
+    return d[1]*theGap/2 + theTopPad;
+    }
+   })
+   .attr("font-size", 8)
+   .attr("text-anchor", "start")
+   .attr("text-height", 14)
+   .attr("fill", function(d){
+    for (var i = 0; i < categories.length; i++){
+        if (d[0] == categories[i]){
+        //  console.log("true!");
+          return d3.rgb(theColorScale(i)).darker();
+        }
+    }
+   });
+
+}
+
+//from this stackexchange question: http://stackoverflow.com/questions/1890203/unique-for-arrays-in-javascript
+function checkUnique(arr) {
+    var hash = {}, result = [];
+    for ( var i = 0, l = arr.length; i < l; ++i ) {
+        if ( !hash.hasOwnProperty(arr[i]) ) { //it works with objects! in FF, at least
+            hash[ arr[i] ] = true;
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+
+//from this stackexchange question: http://stackoverflow.com/questions/14227981/count-how-many-strings-in-an-array-have-duplicates-in-the-same-array
+function getCounts(arr) {
+    var i = arr.length, // var to loop over
+        obj = {}; // obj to store results
+    while (i) obj[arr[--i]] = (obj[arr[i]] || 0) + 1; // count occurrences
+    return obj;
+}
+
+// get specific from everything
+function getCount(word, arr) {
+    return getCounts(arr)[word] || 0;
+}
+})
+</script>
+</html>
