@@ -90,7 +90,7 @@
   //.attr("width", w)
   //.attr("height", h)
   .attr("width", 1200)
-  .attr("height", 1200)
+  .attr("height", 1300)
   .attr("class", "svg");
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -337,7 +337,7 @@ var xAxis = d3.svg.axis()
     .scale(timeScale)
     .orient('bottom')
     .ticks(d3.time.years, 1)
-    .tickSize(h*1.5+theTopPad+50, 0, 0)
+    .tickSize(h*3+theTopPad+50, 0, 0)
     .tickFormat(d3.time.format('%Y'));
 
 var grid = svg.append('g')
