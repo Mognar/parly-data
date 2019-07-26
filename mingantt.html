@@ -113,6 +113,10 @@ d3.select(window)
 
 data.forEach(function(d) {
 	d.firstname = d.firstname
+	if (d.othername == "") {
+		d.othername = ""}
+	else{
+	d.othername = d.othername}
 	d.lastname = d.lastname
 	d.posName = d.posName
 	d.startdate = d.startdate
@@ -234,7 +238,7 @@ var bigRects = svg.append("g")
 
          var rectText = rectangles.append("text")
                .text(function(d){
-                return d.firstname + " " + d.lastname;
+                return d.firstname + " " + d.othername + " " + d.lastname;
                })
                .attr("x", function(d){
                 return (timeScale(dateFormat.parse(d.enddate))-timeScale(dateFormat.parse(d.startdate)))/2 + timeScale(dateFormat.parse(d.startdate)) + theSidePad;
@@ -254,6 +258,7 @@ rectText.on('mouseover', function(e) {
 
          if (d3.select(this).data()[0].enddate != undefined){
           tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+		  "Middlenames: " + d3.select(this).data()[0].othername + "<br/>" +
                 "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
                 "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
 				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
@@ -261,6 +266,7 @@ rectText.on('mouseover', function(e) {
                 "Government grouping: " + d3.select(this).data()[0].group;
          } else {
           tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+		  "Middlenames: " + d3.select(this).data()[0].othername + "<br/>" +
                 "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
 				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
                 "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
@@ -289,6 +295,7 @@ innerRects.on('mouseover', function(e) {
 
          if (d3.select(this).data()[0].enddate != undefined){
           tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+		  "Middlenames: " + d3.select(this).data()[0].othername + "<br/>" +
                 "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
 				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
                 "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
@@ -296,6 +303,7 @@ innerRects.on('mouseover', function(e) {
                 "Government grouping: " + d3.select(this).data()[0].group;
          } else {
           tag = "Firstname: " + d3.select(this).data()[0].firstname + "<br/>" +
+		  "Middlenames: " + d3.select(this).data()[0].othername + "<br/>" +
                 "Lastname: " + d3.select(this).data()[0].lastname + "<br/>" +
 				"Position: " + d3.select(this).data()[0].posName + "<br/>" +
                 "Starts: " + d3.select(this).data()[0].startdate + "<br/>" +
