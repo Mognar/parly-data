@@ -148,11 +148,11 @@ categories = checkUnique(categories);
 makeGant(data, w, h);
 
 var title = svg.append("text")
-              .text("Ministers over time")
+              .text("Key Cabinet ministers 2010-Present")
               .attr("x", w/2)
-              .attr("y", 25)
+              .attr("y", 35)
               .attr("text-anchor", "left")
-              .attr("font-size", 18)
+              .attr("font-size", 28)
               .attr("fill", "#009FFC");
 
 
@@ -166,9 +166,7 @@ var sidePadding = 255;
 
 var colorScale = d3.scale.ordinal()
     .domain([0, categories.length])
-    //.range(["#b773af", "#18c04f","##887e86"])
-    .range(["#b25707","#b714fa","#700fc1","#a2aeaf","#cc50ef","#a82380","#8b0987"])
-	//.range(['#d73027', '#fee08b', '#1a9850'])
+    .range(["#9a4419","#9a8519","6f9a19","2f9a19","#199a44","#199a85"])
     //.interpolate(d3.interpolateHcl);
 
 makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
