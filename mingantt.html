@@ -161,7 +161,7 @@ function makeGant(tasks, pageWidth, pageHeight){
 
 var barHeight = 8;
 var gap = barHeight;
-var topPadding = 30;
+var topPadding = 50;
 var sidePadding = 255;
 
 var colorScale = d3.scale.ordinal()
@@ -247,7 +247,7 @@ var bigRects = svg.append("g")
                .attr("font-size", 8)
                .attr("text-anchor", "middle")
                .attr("text-height", theBarHeight)
-               .attr("fill", "#000");
+               .attr("fill", "#fff");
 
 
 rectText.on('mouseover', function(e) {
