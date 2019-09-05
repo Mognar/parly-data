@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+
+        <!--<link rel="stylesheet" href="css/normalize.css"> -->
+        <link rel="stylesheet" href="main.css">
+        <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+      <h1 class="titletext">Where can I go for food and drink in Parliament?</h1>
+      <h2 class="titletext">
+        Page showing how many of the dining/drinking establishments you can use based on your grade, the time of day and whether it is sitting time.<h2>
+		<h3 class="titletext">
+		(This site currently does not include information for HL staff.)
+      </h3>
+      <div>
+        What grade are you? <select class="styled-select blue semi-square titletext" id="gradelist">
+          <option></option>
+          <option value="de">D/E</option>
+          <option value="C">C</option>
+          <option value="B">B</option>
+          <option value="A">A</option>
+          <option value="mem">Member</option>
+          <option value="peer">Peer</option>
+        </select>
+      </div>
+      <div>
+        Is it a sitting day? <select class="styled-select blue semi-square titletext" id="recesslist">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+	  <div> 
+	  What time of day are you eating?
+	  <select class="styled-select blue semi-square titletext" id="timelist">
+          <option></option>
+          <option value="7">7am</option>
+          <option value="8">8am</option>
+          <option value="9">9am</option>
+          <option value="10">10am</option>
+          <option value="11">11am</option>
+          <option value="12">12pm</option>
+		  <option value="13">1pm</option>
+          <option value="14">2pm</option>
+          <option value="15">3pm</option>
+          <option value="16">4pm</option>
+        </select>
+	  </div>
+	  <div class="allrooms">
+        <div class="Open DiningRoom">
+          Adjournment
+      </div>
+	  <div class="Open DiningRoom">
+          Barry Room
+      </div>
+	    <div class="Open DiningRoom">
+          Bellamy's
+      </div>
+	        <div class="LordsOnly DiningRoom">
+          Bishops' Bar
+      </div>
+	  <div class="Open DiningRoom">
+          Cafe at 14 THS
+      </div>
+	  <div class="MembersOnly DiningRoom">
+          Chess Room
+      </div>
+	       <div class="Open DiningRoom">
+          Churchill Room</br>
+		  Only open Mondays
+      </div>
+	  <div class="Open DiningRoom">
+          Coffee Pod
+      </div>
+      <div class="Open DiningRoom">
+          Courtyard Cafe
+      </div>
+      <div class="Open DiningRoom">
+          Debate
+      </div>
+      <div class="Open DiningRoom">
+          Despatch Box
+      </div>
+      <div class="Open DiningRoom">
+          Jubilee Cafe
+      </div>
+        <div class="Memberlords DiningRoom">
+          Members' Dining Room
+      </div>
+      <div class="Apeople DiningRoom">
+          Members' Tea Room
+      </div>
+      <div class="Open DiningRoom">
+          Millbank Restaurant
+      </div>
+      <div class="Open DiningRoom">
+          Moncrieff's
+      </div>
+        <div class="Memberlords recessall DiningRoom">
+          Peer's Dining Room
+      </div>
+	  <div class="Lords Members12to8 DiningRoom">
+          Peer's Guest Room
+      </div>
+		<div class="Memberlords DiningRoom">
+          Peer's Long Room
+      </div>
+	  <div class="Open A12to8 DiningRoom">
+          Pugin Room
+      </div>
+      <div class="Open DiningRoom">
+          River Restaurant
+      </div>
+      <div class="MembersOnly DiningRoom">
+          Smoking Room
+      </div>
+	  <div class="Bpeople DiningRoom">
+          Strangers' Bar
+      </div>
+	  <div class="Open DiningRoom">
+          Strangers' Dining Room
+      </div>
+      <div class="Open 12to15 DiningRoom">
+          Terrace Cafeteria
+		  </div>
+		  <div class="Open DiningRoom">
+          Terrace Pavilion
+		  </div>
+      <div class="Open DiningRoom">
+          The Woolsack
+      </div>
+    </div>                     
+    <div>
+	<h3 id="roomcount" class="titletext">You have access to 0 rooms at this time.</h3>
+	</div>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <!--<script src="js/plugins.js"></script>-->
+        <script src="main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+      
+    </body>
+</html>
