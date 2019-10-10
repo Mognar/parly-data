@@ -165,7 +165,6 @@ var procedures = [
   'House of Lords Commission',
   'Human Rights Joint Select Committee',
   'Hybrid bills',
-  'Independent Healthcare Providers Network',
   'Joint select committees',
   'Lapsed proceedings',
   'Legislation',
