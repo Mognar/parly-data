@@ -1,70 +1,12 @@
 
 # coding: utf-8
 
-# In[52]:
-
-
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-import urllib
-
-
-# In[3]:
-
-
-import urllib
-
-
-# In[44]:
-
-
-urls = ['https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True', 
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=2',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=3',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=4',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=5',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=6',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=7',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=8',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=9',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=10',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=11',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=12',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=13',
-        'https://hansard.parliament.uk/search/Divisions?startDate=2015-05-03&endDate=2016-05-12&house=Commons&includeCommitteeDivisions=False&partial=True&page=14']
-#scrape elements
-division = []
-title =[]
-date = []
-ayes = []
-noes = []
-for url in urls:
-    rall = requests.get(url)
-    r = rall.content
-    soup = BeautifulSoup(r,"lxml")
-    titles = soup.select('div.title.single-line > span')
-    for t in titles:
-        title.append(t.text)
-    divisions = soup.select('div.division-number')
-    for d in divisions: 
-        division.append(d.text)
-    dates = soup.select('div.information.with-portcullis.clearfix > div')
-    for da in dates:
-        date.append(da.text)
-    ayecount = soup.select('div.counts > strong:nth-of-type(1)')
-    for a in ayecount:
-        ayes.append(a.text)
-    nocount = soup.select('div.counts > strong:nth-of-type(2)')
-    for n in nocount:
-        noes.append(n.text)
-
-
-# In[42]:
-
+import csv
 
 hansardurls = []
-Speakercontrib = []
 urls = ['https://hansard.parliament.uk/search/Debates?endDate=2019-10-28&house=Commons&searchTerm=%22Prime+Minister%22&startDate=2009-06-23&page=1&partial=true',
        'https://hansard.parliament.uk/search/Debates?endDate=2019-10-28&house=Commons&searchTerm=%22Prime+Minister%22&startDate=2009-06-23&page=2&partial=true',
        'https://hansard.parliament.uk/search/Debates?endDate=2019-10-28&house=Commons&searchTerm=%22Prime+Minister%22&startDate=2009-06-23&page=3&partial=true',
@@ -93,28 +35,13 @@ for url in urls:
         if t['title'].lower() == "prime minister [house of commons]":
             hurl = 'https://hansard.parliament.uk/'+t['href']
             hansardurls.append(hurl)
-        #h = 'https://hansard.parliament.uk//Commons/2019-10-23/debates/2CD51EF0-690E-4E60-B520-29E93042256F/PrimeMinister'
-    
-    
-
-
-# In[68]:
-
 
 print(hansardurls)
-
-
-# In[71]:
-
 
 import csv
 with open('hansardurls.csv', 'w', newline='') as myfile:
     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
     wr.writerow(hansardurls)
-
-
-# In[64]:
-
 
 Speakercontrib = []
 Speakerid = []
@@ -142,13 +69,6 @@ for h in hansardurls:
             Speakerid.append(identifier)
             Speakingtime.append(time)
             urloftime.append(h)
-    
-    
-    
-    
-
-
-# In[65]:
 
 
 speakersdf = pd.DataFrame(
@@ -158,33 +78,7 @@ speakersdf = pd.DataFrame(
      'url': urloftime
     })
 
-
-# In[66]:
-
-
 speakersdf
-
-
-# In[49]:
-
-
-votedf = pandas.DataFrame({'division':division, 'Date':date,'Vote title':title, 'Ayes':ayes, 'Noes':noes})
-
-
-# In[50]:
-
-
-votedf
-
-
-# In[51]:
-
-
-votedf.to_csv('divisions1516.csv')
-
-
-# In[67]:
-
 
 speakersdf.to_csv('speakerspmqdf.csv')
 
