@@ -101,7 +101,7 @@ d3.csv("https://raw.githubusercontent.com/Mognar/parly-data/master/draftafflaid1
            return "purple";
          }*/
         .style("fill",function(d) {return myColor(d.department)});
-      });
+      
 
   cell.append("path")
       .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
