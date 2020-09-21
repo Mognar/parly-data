@@ -1,18 +1,4 @@
-{
-  "head" : {
-    "vars" : [
-      "Treaty",
-      "Treatyname",
-      "LeadOrg",
-      "Series",
-      "Link",
-      "workPackage",
-      "procStepName",
-      "date"
-    ]
-  },
-  "results" : {
-    "bindings" : [
+[
       {
         "Treaty" : {
           "type" : "uri",
@@ -4634,5 +4620,4 @@
         }
       }
     ]
-  }
-}
+ 
