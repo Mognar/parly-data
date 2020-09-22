@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #f2f0f7;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.cells path {
+  fill: none;
+  pointer-events: all;
+}
+
+.cells :hover circle {
+  fill: green;
+}
+
+div.tooltip {
+    display:inline;
+    position: absolute;
+    text-align: left;
+    width: 400px;
+    height: auto;
+    padding: 5px;
+    font: 16px sans-serif;
+    background-color: lightgray;
+    border: 0px;
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+svg {
+  /*background-color: #FEF3EC;*/
+  background-color: #006548;
+}
+
+.legend {
+    font-size: 12px;
+  }
+  rect {
+    stroke-width: 2;
+  }
+</style>
+<svg width="1380" height="506"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+
+var svg = d3.select("svg"),
+    margin = {top: 30, right: 40, bottom: 60, left: 40},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom;
+
+var formatValue = d3.format(",d");
+
+
+var x = d3.scaleTime()
+//var x = d3.scaleLinear()
+.domain([new Date(2017, 0, 1), new Date(2020, 11, 31)])
+    //.rangeRound([0, width]);
+    .range([0, width-300]);
+
+    /*var xScale = d3.scaleTime()
+      .domain([new Date(2018, 0, 1), new Date(2020, 11, 31)])
+      .range([50, 1150]);*/
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // Define the div for the tooltip
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+//variables for legends
+  var legendRectSize = 18;
+  var legendSpacing = 4;
+
+
+d3.json("https://raw.githubusercontent.com/Mognar/parly-data/master/queryResults.json", function(error, data) {
+  if (error) throw error;
+  data.forEach(function(d){
+    d.datetrimmed = d.date.value.split('+')[0];
+    console.log(d.datetrimmed)
+  d.Date1 = Date.parse(d.datetrimmed)
+  console.log(d.Date1)
+  d.Date2 = d3.timeMonth(d.Date1)
+  console.log(d.Date2)
+  console.log(d.LeadOrg.value)
+  })
+  x.domain(d3.extent(data, function(d) { return d.Date2; }));
+
+  var myColor = d3.scaleOrdinal()
+  .range(['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', 'red', '#e6beff', '#9a6324', '#fffac8', '#800000', 'slategrey1',"darkblue", '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'])
+
+  var simulation = d3.forceSimulation(data)
+      .force("x", d3.forceX(function(d) { return x(d.Date2); }).strength(1))
+      .force("y", d3.forceY(height / 2))
+      .force("collide", d3.forceCollide(14))
+      .stop();
+
+  for (var i = 0; i < 120; ++i) simulation.tick();
+  g.append("text")
+          .attr("x", (width / 2))
+          .attr("y", 0 - (margin.top / 5))
+          .attr("text-anchor", "middle")
+          .style("font-size", "24px")
+          .style("font-family", "Tahoma")
+          .style("text-decoration", "underline")
+          .style("fill", "#f2f0f7")
+          .text("All Treaties Subject to CRAG 2010 by Lead Organisation");
+
+g.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top - 45))
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .style("font-family", "Tahoma")
+        .style("fill", "#f2f0f7")
+        .text("Click a point on the chart or hover over a square on the legend to highlight all treaties from a given department");
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).ticks(20));
+
+  g.append("text")
+      .attr("transform",
+            "translate(" + (width/2-100) + " ," +
+                            (height + margin.top + 10) + ")")
+      .style("text-anchor", "middle")
+      .style("font-size", "14px")
+      .style("font-family", "Tahoma")
+      .style("fill", "#f2f0f7")
+      .text("Date the treaty was laid before the House of Commons");
+
+  var cell = g.append("g")
+      .attr("class", "cells")
+    .selectAll("g").data(d3.voronoi()
+        .extent([[-margin.left, -margin.top], [width + margin.right, height + margin.top]])
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+      .polygons(data)).enter().append("g");
+
+
+  cell.append("circle")
+      .attr("class", function(d){
+        org = d.data.LeadOrg.value;
+        return org.replace(/[\s,]/g,'') })
+
+      .attr("r", 8)
+      .attr("cx", function(d) { return d.data.x; })
+      .attr("cy", function(d) { return d.data.y; })
+  //commented out this function, as it previously coloured the points based on which houses approved the SI. Now coloured by dept.
+      /*.style("fill", function(d) {
+         if(d.data.procStepName2 == " Instrument approved by the House of Commons ") {
+           return "green";
+         } else {
+           return "purple";
+         }*/
+        .style("fill",function(d) {return myColor(d.data.LeadOrg.value)})
+        .style("opacity",1);
+//on mouseover (tap on phones), show the tooltip div.
+        cell.on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html("<b>" + d.data.Treatyname.value + "</b><br/>"  + d.data.LeadOrg.value  + "<br/>"  +  d.data.Date2 + "<br/>")
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 12) + "px");
+            })
+  //on mouseout, hide the tooltip div.
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+       })
+  //clicking or tapping on a point on the chart will lower the opacity of SIs from all other departments.
+       .on("click", function(d){
+         // is the element currently visible ?
+         currentOpacity = d3.selectAll("circle:not(." + d.data.LeadOrg.value.replace(/[\s,]/g,'')+")").style("opacity")
+         //console.log(d.data.LeadOrg.value.replace(/[\s,]/g,''))
+         // Change the opacity: from 0 to 1 or from 1 to 0
+         d3.selectAll("circle:not(."+ d.data.LeadOrg.value.replace(/[\s,]/g,'')+")").transition().style("opacity", currentOpacity == 1 ? 0.2:1)
+
+       });
+
+
+
+
+
+  cell.append("path")
+      .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+
+
+      var legend = svg.selectAll('.legend')
+      .data(myColor.domain())
+      .enter()
+      .append('g')
+      .attr('class', 'legend')
+      .attr('transform', function(d, i) {
+        var height = legendRectSize + legendSpacing;
+        var offset =  height * myColor.domain().length / 4;
+        var horz = 20 * legendRectSize;
+        var vert = i * height + offset;
+        return 'translate(' + 1080 + ',' + vert + ')';
+      });
+
+      legend.append('rect')                                     // NEW
+         .attr('width', legendRectSize)                          // NEW
+         .attr('height', legendRectSize)                         // NEW
+         .style('fill', myColor)                                   // NEW
+         .style('stroke', myColor)
+         .on("mouseover", function(d){
+           //console.log(d)
+           // is the element currently visible ?
+           currentOpacity = d3.selectAll("circle:not(." + d.replace(/[\s,]/g,'')+")").style("opacity")
+           //console.log(d.replace(/[\s,]/g,''))
+           // Change the opacity: from 0 to 1 or from 1 to 0
+           d3.selectAll("circle:not(."+ d.replace(/[\s,]/g,'')+")").transition().duration(50).style("opacity", /*currentOpacity == 1 ? 0.2:1*/0.2)
+
+         })
+         .on("mouseout", function(d) {                            // NEW
+           currentOpacity = d3.selectAll("circle:not(." + d.replace(/[\s,]/g,'')+")").style("opacity")
+           //console.log(d.replace(/[\s,]/g,''))
+           // Change the opacity: from 0 to 1 or from 1 to 0
+           d3.selectAll("circle:not(."+ d.replace(/[\s,]/g,'')+")").transition().duration(50).style("opacity", /*currentOpacity == 1 ? 0.2:1*/1)
+
+         });
+       legend.append('text')                                     // NEW
+         .attr('x', legendRectSize + legendSpacing)              // NEW
+         .attr('y', legendRectSize - legendSpacing)
+         .style("font-size", "10px")
+         .style("font-family", "Tahoma")
+         .style("fill", "#f2f0f7")          // NEW
+         .text(function(d) { return d; });
+
+//commented out append of text to points - this only showed up on desktops, not phones/tablets.
+  /*cell.append("title")
+      .text(function(d) { return d.data.SIname + "\nDays between laying and approval: " + formatValue(d.data.time); });
+
+
+//commented out the code that applied a legend to the chart, when the chart was colour coded by House approval and not department.
+      svg.append("circle").attr("cx",510).attr("cy",40).attr("r", 6).style("fill", "#7C1389")
+      svg.append("circle").attr("cx",510).attr("cy",60).attr("r", 6).style("fill", "#006548")
+      svg.append("text").attr("x", 530).attr("y", 40).text("Instrument approved by the House of Commons and the House of Lords").style("font-size", "10px").style("font-family", "Tahoma").attr("alignment-baseline","middle")
+      svg.append("text").attr("x", 530).attr("y", 60).text("Instrument approved by the House of Commons").style("font-size", "10px").style("font-family", "Tahoma").attr("alignment-baseline","middle")*/
+
+});
+
+function type(d) {
+  if (!d. Date2) return;
+  d. Date2 = +d.Date2;
+  return d;
+}
+
+</script>
