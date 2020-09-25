@@ -114,7 +114,9 @@ var xAxis = d3.axisBottom(xScale);
 
 //d3.csv("https://rawcdn.githack.com/Mognar/parly-data/67eccc28884e92eb07c083df4cb8ded645e2aa82/results4usdates.csv", function (error, data) {
 d3.json("https://api.parliament.uk/sparql#query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+%3A+%3Chttps%3A%2F%2Fid.parliament.uk%2Fschema%2F%3E%0APREFIX+id%3A+%3Chttps%3A%2F%2Fid.parliament.uk%2F%3E%0Aselect+%3FTreaty+%3FTreatyname+%3FLeadOrg+%3FSeries+%3FLink+%3FworkPackage+%3FprocStepName+%3Fdate+where+%7B%0A+%3FTreaty+a+%3ATreaty+.++%0A+++++%3FTreaty+rdfs%3Alabel+%3FTreatyname+.%0A++OPTIONAL%7B+%3FTreaty+%3AtreatyHasLeadGovernmentOrganisation%2F+rdfs%3Alabel+%3FLeadOrg+.%7D+%0A++OPTIONAL+%7B%3FTreaty+%3AtreatyHasSeriesMembership%2F+%3AseriesItemCitation+%3FSeries.%7D%0A++OPTIONAL+%7B%3FTreaty+%3AworkPackagedThingHasWorkPackagedThingWebLink+%3FLink.%7D%0A%09%3FTreaty+%3AworkPackagedThingHasWorkPackage+%3FworkPackage+.%0A++%09%3FworkPackage+%3AworkPackageHasProcedure%2Frdfs%3Alabel+%3Fproc%0A++FILTER(%3Fproc+IN+(%22Treaties+subject+to+the+Constitutional+Reform+and+Governance+Act+2010%22))%0A+++%3FworkPackage+%3AworkPackageHasBusinessItem+%3FprocStep+.%0A+++++%3FprocStep+%3AbusinessItemDate+%3Fdate+.%0A++%3FprocStep+%3AbusinessItemHasProcedureStep+id%3Acspzmb6w+.%0A++%3FprocStep+%3AbusinessItemHasProcedureStep%2Frdfs%3Alabel+%3FprocStepName.+%0A++++%0A+++%7D%0A&contentTypeConstruct=text%2Fturtle&contentTypeSelect=application%2Fsparql-results%2Bjson&endpoint=https%3A%2F%2Fapi.parliament.uk%2Fsparql&requestMethod=GET&tabTitle=All+treaties&headers=%7B%7D&outputFormat=rawResponse", function (error, data) {
-  data.forEach(function(d){
+ if (error) alert(error);
+	alert(data)
+	data.forEach(function(d){
     d.datetrimmed = d.date.value.split('+')[0];
     console.log(d.datetrimmed)
 	d.Date1 = Date.parse(d.datetrimmed)
