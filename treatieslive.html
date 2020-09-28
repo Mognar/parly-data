@@ -70,7 +70,7 @@ var x = d3.scaleTime()
     .range([0, width-300]);
 
     /*var xScale = d3.scaleTime()
-      .domain([new Date(2018, 0, 1), new Date(2020, 11, 31)])
+      .domain([new Date(2018, 0, 1), new Date(2020, 12, 31)])
       .range([50, 1150]);*/
 
 var g = svg.append("g")
@@ -124,7 +124,7 @@ var data1 = data.results.bindings;
           .style("font-family", "Tahoma")
           .style("text-decoration", "underline")
           .style("fill", "#f2f0f7")
-          .text("All Treaties Subject to CRAG 2010 by Lead Organisation");
+          .text("All Treaties Subject to CRAG 2010 by Department from 2017-19 session onwards");
 
 g.append("text")
         .attr("x", (width / 2))
