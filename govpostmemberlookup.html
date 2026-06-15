@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Member IDs Lookup</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    input, button { padding: 8px; margin: 5px 0; }
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 300px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th { background: #f4f4f4; }
+  </style>
+</head>
+<body>
+
+<h2>Get Member IDs by Government Post</h2>
+
+<input type="number" id="postId" placeholder="Enter GovernmentPost_Id">
+<br>
+<button onclick="fetchData()">Fetch</button>
+
+<div id="output"></div>
+
+<script>
+async function fetchData() {
+  const postId = document.getElementById("postId").value;
+  const output = document.getElementById("output");
+
+  if (!postId) {
+    output.innerHTML = "<p>Please enter an ID</p>";
+    return;
+  }
+
+  const url = `https://data.parliament.uk/membersdataplatform/open/OData.svc/MemberGovernmentPosts?$filter=GovernmentPost_Id eq ${postId}&$select=Member_Id`;
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, "application/xml");
+
+    const entries = xml.getElementsByTagName("entry");
+
+    if (entries.length === 0) {
+      output.innerHTML = "<p>No results found</p>";
+      return;
+    }
+
+    let table = `
+      <table>
+        <tr><th>Member_Id</th></tr>
+    `;
+
+    for (let entry of entries) {
+      const props = entry.getElementsByTagName("m:properties")[0];
+      const idNode = props.getElementsByTagName("d:Member_Id")[0];
+      const memberId = idNode?.textContent || "";
+
+      table += `<tr><td>${memberId}</td></tr>`;
+    }
+
+    table += "</table>";
+    output.innerHTML = table;
+
+  } catch (err) {
+    output.innerHTML = "<p>Error fetching data</p>";
+    console.error(err);
+  }
+}
+</script>
